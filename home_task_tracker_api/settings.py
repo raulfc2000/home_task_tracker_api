@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +32,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,17 +41,58 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # auth
-    'dj-rest-auth',
+    'dj_rest_auth',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth.registration',
+
 
     # Installed apps
     'rest_framework',
+    'rest_framework_simplejwt',
+    'django_filters',
+    'rest_framework.authtoken',
 
 
     # User defined apps
     'apps.group',
     'apps.routine',
     'apps.task',
-]
+)
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=10),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=50),
+    "UPDATE_LAST_LOGIN": True,
+}
+
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_HTTPONLY': False,
+    'REGISTER_SERIALIZER': 'dj_rest_auth.registration.serializers.RegisterSerializer',
+    'REGISTER_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
+}
+
+# TODO
+# REST_AUTH_SERIALIZERS = {
+#     'PASSWORD_RESET_SERIALIZER': 'apps.auth.serializers.CustomPasswordResetSerializer',
+# }
+
+SITE_ID = 1
+
+# Swagger documentation SETTINGS.
+# Package is drf_yasg
+SWAGGER_SETTINGS = {
+    'DEFAULT_INFO': 'golf_api.urls.api_info',
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

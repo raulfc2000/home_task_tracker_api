@@ -16,10 +16,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
 
+# AUTH (https://dj-rest-auth.readthedocs.io/en/latest/introduction.html)
 dj_rest_auth_path = path('auth/', include('dj_rest_auth.urls'))
+# TODO importante url para el password reset
+dj_rest_auth_path_registration = path('auth/registration/', include('dj_rest_auth.registration.urls'))
+# TODO ¿social authentication? ej. Iniciar Sesión con Google
+
+# SWAGGER (https://django-rest-swagger.readthedocs.io/en/latest/)
+api_info = openapi.Info(
+    title="Golf Backend",
+    default_version='v1',
+    terms_of_service="TODO",
+    contact=openapi.Contact(email="yanngelmarbella@gmail.com"),
+)
+schema_view = get_schema_view(
+    info=api_info,
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     dj_rest_auth_path,
+    dj_rest_auth_path_registration,
     path('admin/', admin.site.urls),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
