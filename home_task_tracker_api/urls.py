@@ -28,7 +28,7 @@ dj_rest_auth_path_registration = path('auth/registration/', include('dj_rest_aut
 
 # SWAGGER (https://django-rest-swagger.readthedocs.io/en/latest/)
 api_info = openapi.Info(
-    title="Golf Backend",
+    title="Home Task Tracker Backend",
     default_version='v1',
     terms_of_service="TODO",
     contact=openapi.Contact(email="yanngelmarbella@gmail.com"),

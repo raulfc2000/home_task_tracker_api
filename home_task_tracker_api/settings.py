@@ -54,6 +54,8 @@ INSTALLED_APPS = (
     'django_filters',
     'rest_framework.authtoken',
 
+    # Docs
+    'drf_yasg',
 
     # User defined apps
     'apps.group',
@@ -81,10 +83,29 @@ REST_AUTH = {
 
 SITE_ID = 1
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.OrderingFilter',
+        'rest_framework.filters.SearchFilter',
+    ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/minute',
+    },
+    'DEFAULT_PAGINATION_CLASS': 'home_task_tracker_api.pagination.CustomPagination',
+    'PAGE_SIZE': 10,
+}
+
 # Swagger documentation SETTINGS.
 # Package is drf_yasg
 SWAGGER_SETTINGS = {
-    'DEFAULT_INFO': 'golf_api.urls.api_info',
+    'DEFAULT_INFO': 'home_task_tracker_api.urls.api_info',
     'SECURITY_DEFINITIONS': {
         'Bearer': {
             'type': 'apiKey',
