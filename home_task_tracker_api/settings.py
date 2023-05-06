@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -151,12 +151,17 @@ WSGI_APPLICATION = 'home_task_tracker_api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-# TODO
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('POSTGRES_DB', "htt_local_db"),
+        'USER': os.environ.get('POSTGRES_USER', "user_htt"),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', "password"),
+        'HOST': os.environ.get('POSTGRES_HOST', "127.0.0.1"),
+        'PORT': os.environ.get('POSTGRES_PORT', "5432"),
+        'TEST': {
+            'NAME': 'test_pgdb'
+        }
     }
 }
 
