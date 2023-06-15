@@ -8,7 +8,9 @@ piso.
     - Group: 
     Grupos de usuarios creados por usuarios. 
     - Routine
+    Rutinas asociadas a un grupo de usuarios, que contienen a su vez una lista de tareas.
     - Task
+    Cada una de las tareas que se añadirán a una rutina. Almacena a su vez el usuario que la ha creado.
 
 ## Permisos
 
