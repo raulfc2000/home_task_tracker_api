@@ -1,3 +1,17 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
+
+class Group(models.Model):
+    """
+    Modelo Group
+    - id: (IntegerField) Número entero, único y auto-incremental, asignado automáticamente.
+    - user_owner: (OneToOneField) Usuario que ha creado el group. Se asignará automáticamente.
+    - users_list: (ManyToManyField) Listado de usuarios que pertenecen al grupo. Se usará para los permisos.
+    - routine: (ReverseOneToOneField) OneToOneField que vendrá desde la rutina asociada al grupo.
+
+    - created_at: (DateTimeField) Fecha en la cual se creó el grupo.
+    - updated_at: (DateTimeField) Fecha de la última actualización realizada al grupo.
+    """
+    user_owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='owner_of_group')
+    users_list = models.ManyToManyField(User, related_name='user_in_groups')
