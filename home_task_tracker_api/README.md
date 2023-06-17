@@ -17,9 +17,9 @@ piso.
     Por defecto:
     - AllowAny (Permite realizar la petición a cualquier usuario, autenticado o no)
     - IsAuthenticated (Permite realizar la petición únicamente a los usuarios autenticados)
-    - IsSuperUser (Permite realizar la petición únicamente a los superusuarios)
 [//]: # (Ver si es estrictamente necesario el permiso IsOwnUser)
     Customs:
+    - IsSuperUser (Permite realizar la petición únicamente a los superusuarios)
     - IsOwnUser (El usuario que se quiere modificar es el propio usuario)
     - IsInGroup (El usuario que realiza la petición está en el grupo de la Routine)
 
