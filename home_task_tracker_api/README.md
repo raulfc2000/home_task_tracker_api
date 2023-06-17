@@ -21,7 +21,7 @@ piso.
     Customs:
     - IsSuperUser (Permite realizar la petición únicamente a los superusuarios)
     - IsOwnUser (El usuario que se quiere modificar es el propio usuario)
-    - IsInGroup (El usuario que realiza la petición está en el grupo de la Routine)
+    - IsMemberOfGroup (El usuario que realiza la petición está en el grupo de la Routine)
 
 ## Testeo
 

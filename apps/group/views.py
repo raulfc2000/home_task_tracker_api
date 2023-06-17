@@ -9,3 +9,5 @@ class GroupView(viewsets.ModelViewSet):
     View de Group
     """
     queryset = Group.objects.all()
+
+    serializer_class =
