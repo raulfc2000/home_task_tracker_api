@@ -27,12 +27,24 @@ class UserGroupSerializer(serializers.ModelSerializer):
         )
 
 
+class UserPKRelatedField(serializers.PrimaryKeyRelatedField):
+    def to_representation(self, value):
+        user = User.objects.get(pk=value.pk)
+        user_serialized = UserGroupSerializer(user)
+
+        return user_serialized.data
+
+
 class GroupSerializer(serializers.ModelSerializer):
     """
     Serializer de Group
     """
     user_owner = UserGroupSerializer(read_only=True)
-    user_list = UserGroupSerializer(many=True, read_only=True)
+    user_list = UserPKRelatedField(
+        queryset=User.objects.all(),
+        many=True,
+        required=False,
+    )
 
     class Meta:
         model = Group
