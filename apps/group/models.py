@@ -15,10 +15,10 @@ class Group(models.Model):
     - updated_at: (DateTimeField) Fecha de la última actualización realizada al grupo.
     """
     name = models.CharField(verbose_name='Nombre del grupo', max_length=120)
-    user_owner = models.OneToOneField(User,
-                                      verbose_name='Usuario propietario',
-                                      on_delete=models.CASCADE,
-                                      related_name='owner_of_group')
+    user_owner = models.ForeignKey(User,
+                                   verbose_name='Usuario propietario',
+                                   on_delete=models.CASCADE,
+                                   related_name='owner_of_group')
     users_list = models.ManyToManyField(User, verbose_name='Listado de usuarios', related_name='user_in_groups')
 
     created_at = models.DateTimeField(verbose_name='Fecha de creación', auto_now_add=True)

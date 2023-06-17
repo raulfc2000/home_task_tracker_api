@@ -40,7 +40,7 @@ class GroupSerializer(serializers.ModelSerializer):
     Serializer de Group
     """
     user_owner = UserGroupSerializer(read_only=True)
-    user_list = UserPKRelatedField(
+    users_list = UserPKRelatedField(
         queryset=User.objects.all(),
         many=True,
         required=False,
@@ -50,8 +50,9 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = (
             'id',
+            'name',
             'user_owner',
-            'user_list',
+            'users_list',  # TODO posibilidad de serializer para patch de user_add y user_remove
             # 'routine', TODO poner cuando routine esté hecho
             'created_at',
             'updated_at',
@@ -70,6 +71,8 @@ class GroupSerializer(serializers.ModelSerializer):
 
         # Asociarlo al user_owner y añadirlo al listado de usuarios.
         validated_data['user_owner'] = user
+
+        validated_data['users_list'] = []
         validated_data['users_list'].append(user)
 
         return super().create(validated_data)
