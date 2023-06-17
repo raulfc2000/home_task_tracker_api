@@ -20,3 +20,6 @@ class Group(models.Model):
                                       on_delete=models.CASCADE,
                                       related_name='owner_of_group')
     users_list = models.ManyToManyField(User, verbose_name='Listado de usuarios', related_name='user_in_groups')
+
+    created_at = models.DateTimeField(verbose_name='Fecha de creación', auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name='Fecha de actualización', auto_now=True)
