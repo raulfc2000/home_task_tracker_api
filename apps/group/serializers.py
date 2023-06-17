@@ -1,12 +1,39 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from apps.group.models import Group
+
+
+class UserGroupSerializer(serializers.ModelSerializer):
+    """
+    Serializer de usuario para utilizarlo en Group
+    """
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+            'email'
+        )
+
+        read_only_fields = (
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+        )
 
 
 class GroupSerializer(serializers.ModelSerializer):
     """
     Serializer de Group
     """
+    user_owner = UserGroupSerializer(read_only=True)
+    user_list = UserGroupSerializer(many=True, read_only=True)
+
     class Meta:
         model = Group
         fields = (
