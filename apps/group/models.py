@@ -7,7 +7,7 @@ class Group(models.Model):
     Modelo Group
     - id: (IntegerField) Número entero, único y auto-incremental, asignado automáticamente.
     - name: (CharField) String, nombre del grupo.
-    - user_owner: (OneToOneField) Usuario que ha creado el group. Se asignará automáticamente.
+    - user_owner: (ForeignKey) Usuario que ha creado el group. Se asignará automáticamente.
     - users_list: (ManyToManyField) Listado de usuarios que pertenecen al grupo. Se usará para los permisos.
     - routine: (ReverseOneToOneField) OneToOneField que vendrá desde la rutina asociada al grupo.
 
