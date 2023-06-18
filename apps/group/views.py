@@ -38,7 +38,7 @@ class GroupView(viewsets.ModelViewSet):
             return self.queryset
         # Si no lo es, filtrará por los grupos a los que pertenezca.
         else:
-            return Group.objects.filter(users_list=user)
+            return Group.objects.filter(users_list=user.id)
 
     @doc_view_group_list
     def list(self, request, *args, **kwargs):
@@ -70,7 +70,7 @@ class GroupView(viewsets.ModelViewSet):
         result = super().create(request, *args, **kwargs)
         return result
 
-    # @doc_view_group_partial_update
+    @doc_view_group_partial_update
     def partial_update(self, request, *args, **kwargs):
         """
         Actualizar parcialmente Group
@@ -80,7 +80,7 @@ class GroupView(viewsets.ModelViewSet):
         result = super().partial_update(request, *args, **kwargs)
         return result
 
-    # @doc_view_group_destroy
+    @doc_view_group_destroy
     def destroy(self, request, *args, **kwargs):
         """
         Eliminar Group.

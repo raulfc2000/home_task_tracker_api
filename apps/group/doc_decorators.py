@@ -73,7 +73,6 @@ def doc_view_group_destroy(action):
     This decorator purpose is to reuse the auto schema.
     """
     destroy_responses = {
-        400: 'Los parámetros deben ser correctos.',
         401: 'El usuario debe estar autenticado',
         204: openapi.Response('response description', GroupSerializer()),
     }
