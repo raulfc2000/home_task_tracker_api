@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from apps.routine.doc_decorators import doc_view_routine_list, doc_view_routine_retrieve, doc_view_routine_create, \
+from apps.routine.doc_decorators import doc_view_routine_retrieve, doc_view_routine_create, \
     doc_view_routine_partial_update, doc_view_routine_destroy
 from apps.routine.models import Routine
 from apps.routine.serializers import RoutineSerializer
@@ -40,16 +40,6 @@ class RoutineView(viewsets.ModelViewSet):
         # Si no lo es, filtrará por los grupos a los que pertenezca.
         else:
             return Routine.objects.filter(group__users_list=user.id)
-
-    @doc_view_routine_list
-    def list(self, request, *args, **kwargs):
-        """
-        Listar Routines.
-
-        Petición para listar Rutinas.
-        """
-        result = super().list(request, *args, **kwargs)
-        return result
 
     @doc_view_routine_retrieve
     def retrieve(self, request, *args, **kwargs):

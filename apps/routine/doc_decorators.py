@@ -5,31 +5,6 @@ from apps.routine.serializers import RoutineSerializer
 
 
 # Decoradores
-
-
-def doc_view_routine_list(action):
-    """
-    This decorator purpose is to reuse the auto schema.
-    """
-    list_param = [
-        openapi.Parameter('search', openapi.IN_QUERY,
-                          description='Campos de búsqueda: name',
-                          type=openapi.TYPE_STRING),
-        openapi.Parameter('filter', openapi.IN_QUERY,
-                          description='Campos de filtrado: name, group',
-                          type=openapi.TYPE_STRING),
-        openapi.Parameter('ordering', openapi.IN_QUERY,
-                          description='Campos de ordenación: created_at, updated_at',
-                          type=openapi.TYPE_STRING)
-    ]
-
-    list_responses = {
-        401: 'El usuario debe estar autenticado',
-        200: openapi.Response('response description', RoutineSerializer(many=True)),
-    }
-    return swagger_auto_schema(manual_parameters=list_param, responses=list_responses)(action)
-
-
 def doc_view_routine_retrieve(action):
     """
     This decorator purpose is to reuse the auto schema.
