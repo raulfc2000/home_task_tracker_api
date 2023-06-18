@@ -46,7 +46,7 @@ class RoutineView(viewsets.ModelViewSet):
         """
         Listar Routines.
 
-        Petición para listar Grupos.
+        Petición para listar Rutinas.
         """
         result = super().list(request, *args, **kwargs)
         return result

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.group.models import Group
+from apps.routine.models import Routine
 
 
 class RoutineSerializer(serializers.ModelSerializer):
@@ -8,10 +8,8 @@ class RoutineSerializer(serializers.ModelSerializer):
     Serializer de Routine
     """
 
-    # group = serializers.PrimaryKeyRelatedField()  TODO comprobar si por defecto lo hace así
-
     class Meta:
-        model = Group
+        model = Routine
         fields = (
             'id',
             'name',
