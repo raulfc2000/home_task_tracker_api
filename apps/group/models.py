@@ -9,7 +9,6 @@ class Group(models.Model):
     - name: (CharField) String, nombre del grupo.
     - user_owner: (ForeignKey) Usuario que ha creado el group. Se asignará automáticamente.
     - users_list: (ManyToManyField) Listado de usuarios que pertenecen al grupo. Se usará para los permisos.
-    - routine: (ReverseOneToOneField) OneToOneField que vendrá desde la rutina asociada al grupo.
 
     - created_at: (DateTimeField) Fecha en la cual se creó el grupo.
     - updated_at: (DateTimeField) Fecha de la última actualización realizada al grupo.
