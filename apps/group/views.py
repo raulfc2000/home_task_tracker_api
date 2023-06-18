@@ -28,9 +28,15 @@ class GroupView(viewsets.ModelViewSet):
     ordering_fields = ['created_at', 'updated_at']
 
     def get_queryset(self):
+        """
+        Modificación del queryset
+        """
         user = self.request.user
+
+        # Si es superuser recibirá el queryset genérico
         if user.is_superuser:
             return self.queryset
+        # Si no lo es, filtrará por los grupos a los que pertenezca.
         else:
             return Group.objects.filter(users_list=user)
 
