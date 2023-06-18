@@ -1,24 +1,25 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from apps.group.models import Group
-from apps.group.serializers import GroupSerializer
-from apps.group.doc_decorators import doc_view_group_list, doc_view_group_retrieve, doc_view_group_create, \
-    doc_view_group_partial_update, doc_view_group_destroy
+from apps.routine.doc_decorators import doc_view_routine_list, doc_view_routine_retrieve, doc_view_routine_create, \
+    doc_view_routine_partial_update, doc_view_routine_destroy
+from apps.routine.models import Routine
+from apps.routine.serializers import RoutineSerializer
 
 
-class GroupView(viewsets.ModelViewSet):
+class RoutineView(viewsets.ModelViewSet):
     """
-    View de Group
+    View de Routine
     """
-    queryset = Group.objects.all()
+    queryset = Routine.objects.all()
 
-    serializer_class = GroupSerializer
+    serializer_class = RoutineSerializer
 
     permission_classes = (IsAuthenticated, )
 
     filterset_fields = {
         'name': ['exact'],
+        'group': ['exact'],
     }
 
     search_fields = {
@@ -38,54 +39,54 @@ class GroupView(viewsets.ModelViewSet):
             return self.queryset
         # Si no lo es, filtrará por los grupos a los que pertenezca.
         else:
-            return Group.objects.filter(users_list=user.id)
+            return Routine.objects.filter(group__users_list=user.id)
 
-    @doc_view_group_list
+    @doc_view_routine_list
     def list(self, request, *args, **kwargs):
         """
-        Listar Groups.
+        Listar Routines.
 
         Petición para listar Grupos.
         """
         result = super().list(request, *args, **kwargs)
         return result
 
-    @doc_view_group_retrieve
+    @doc_view_routine_retrieve
     def retrieve(self, request, *args, **kwargs):
         """
-        Obtener un Group.
+        Obtener un Routine.
 
-        Petición para obtener un Group.
+        Petición para obtener un Routine.
         """
         result = super().retrieve(request, *args, **kwargs)
         return result
 
-    @doc_view_group_create
+    @doc_view_routine_create
     def create(self, request, *args, **kwargs):
         """
-        Crear Group.
+        Crear Routine.
 
-        Petición para crear Group.
+        Petición para crear Routine.
         """
         result = super().create(request, *args, **kwargs)
         return result
 
-    @doc_view_group_partial_update
+    @doc_view_routine_partial_update
     def partial_update(self, request, *args, **kwargs):
         """
-        Actualizar parcialmente Group
+        Actualizar parcialmente Routine
 
-        Petición para actualizar parcialmente un Group.
+        Petición para actualizar parcialmente un Routine.
         """
         result = super().partial_update(request, *args, **kwargs)
         return result
 
-    @doc_view_group_destroy
+    @doc_view_routine_destroy
     def destroy(self, request, *args, **kwargs):
         """
-        Eliminar Group.
+        Eliminar Routine.
 
-        Petición para eliminar Group.
+        Petición para eliminar Routine.
         """
         result = super().destroy(request, *args, **kwargs)
         return result
