@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from apps.group.models import Group
+from apps.routine.serializers import RoutineSerializer
 
 
 class UserGroupSerializer(serializers.ModelSerializer):
@@ -45,6 +46,7 @@ class GroupSerializer(serializers.ModelSerializer):
         many=True,
         required=False,
     )
+    routines = RoutineSerializer(many=True, read_only=True)
 
     class Meta:
         model = Group
@@ -52,8 +54,8 @@ class GroupSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'user_owner',
-            'users_list',  # TODO posibilidad de serializer para patch de user_add y user_remove
-            # 'routine', TODO poner cuando routine esté hecho
+            'users_list',
+            'routines',
             'created_at',
             'updated_at',
         )
@@ -61,6 +63,7 @@ class GroupSerializer(serializers.ModelSerializer):
         read_only_fields = (
             'id',
             'user_owner',
+            'routines',
             'created_at',
             'updated_at',
         )
