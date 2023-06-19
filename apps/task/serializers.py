@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from apps.group.models import Group
+from apps.task.models import Task
 
 
 class UserTaskSerializer(serializers.ModelSerializer):
@@ -58,7 +58,7 @@ class TaskSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = Group
+        model = Task
         fields = (
             'id',
             'routine',
@@ -83,7 +83,7 @@ class TaskSerializer(serializers.ModelSerializer):
         # Obtener el usuario de la petición.
         user = self.context['request'].user
 
-        # Asociarlo al user_owner y añadirlo al listado de usuarios.
+        # Asociarlo al created_by.
         validated_data['created_by'] = user
 
         return super().create(validated_data)

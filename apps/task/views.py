@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
-from apps.group.doc_decorators import doc_view_group_list, doc_view_group_retrieve, doc_view_group_create, \
-    doc_view_group_partial_update, doc_view_group_destroy
+from apps.task.doc_decorators import doc_view_task_list, doc_view_task_retrieve, doc_view_task_create, \
+    doc_view_task_partial_update, doc_view_task_destroy
 from apps.task.models import Task
 from apps.task.serializers import TaskSerializer
 
@@ -45,7 +45,7 @@ class TaskView(viewsets.ModelViewSet):
         else:
             return Task.objects.filter(routine__group__users_list=user.id)
 
-    # @doc_view_group_list
+    @doc_view_task_list
     def list(self, request, *args, **kwargs):
         """
         Listar Tasks.
@@ -55,7 +55,7 @@ class TaskView(viewsets.ModelViewSet):
         result = super().list(request, *args, **kwargs)
         return result
 
-    # @doc_view_group_retrieve
+    @doc_view_task_retrieve
     def retrieve(self, request, *args, **kwargs):
         """
         Obtener un Task.
@@ -65,7 +65,7 @@ class TaskView(viewsets.ModelViewSet):
         result = super().retrieve(request, *args, **kwargs)
         return result
 
-    # @doc_view_group_create
+    @doc_view_task_create
     def create(self, request, *args, **kwargs):
         """
         Crear Task.
@@ -75,7 +75,7 @@ class TaskView(viewsets.ModelViewSet):
         result = super().create(request, *args, **kwargs)
         return result
 
-    # @doc_view_group_partial_update
+    @doc_view_task_partial_update
     def partial_update(self, request, *args, **kwargs):
         """
         Actualizar parcialmente Task
@@ -85,7 +85,7 @@ class TaskView(viewsets.ModelViewSet):
         result = super().partial_update(request, *args, **kwargs)
         return result
 
-    # @doc_view_group_destroy
+    @doc_view_task_destroy
     def destroy(self, request, *args, **kwargs):
         """
         Eliminar Task.
