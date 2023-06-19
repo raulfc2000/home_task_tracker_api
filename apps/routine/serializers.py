@@ -17,14 +17,14 @@ class RoutineSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'group',
-            'tasks'
+            'tasks',
             'created_at',
             'updated_at',
         )
 
         read_only_fields = (
             'id',
-            'tasks'
+            'tasks',
             'created_at',
             'updated_at',
         )
