@@ -41,6 +41,11 @@ class TaskView(viewsets.ModelViewSet):
         # Si es superuser recibirá el queryset genérico
         if user.is_superuser:
             return self.queryset
+
+        # Si el método usado es get en la petición de listar, filtrará por las tareas que debe hacer el usuario
+        if 'pk' not in self.kwargs and self.request.method == 'GET':
+            return Task.objects.filter(assigned_to=user.id)
+
         # Si no lo es, filtrará por los grupos a los que pertenezca.
         else:
             return Task.objects.filter(routine__group__users_list=user.id)
