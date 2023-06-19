@@ -17,17 +17,6 @@ class RoutineView(viewsets.ModelViewSet):
 
     permission_classes = (IsAuthenticated, )
 
-    filterset_fields = {
-        'name': ['exact'],
-        'group': ['exact'],
-    }
-
-    search_fields = {
-        'name',
-    }
-
-    ordering_fields = ['created_at', 'updated_at']
-
     def get_queryset(self):
         """
         Modificación del queryset
