@@ -20,3 +20,6 @@ class Routine(models.Model):
 
     class Meta:
         unique_together = ('name', 'group')
+
+    def __str__(self):
+        return f'Routine [{self.pk}] {self.name}'

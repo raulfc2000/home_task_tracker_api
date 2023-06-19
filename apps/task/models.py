@@ -37,3 +37,6 @@ class Task(models.Model):
 
     created_at = models.DateTimeField(verbose_name='Fecha de creación', auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name='Fecha de actualización', auto_now=True)
+
+    def __str__(self):
+        return f'Task [{self.pk}] {self.title}'
