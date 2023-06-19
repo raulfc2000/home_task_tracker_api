@@ -22,7 +22,6 @@ from rest_framework import permissions
 
 # AUTH (https://dj-rest-auth.readthedocs.io/en/latest/introduction.html)
 dj_rest_auth_path = path('auth/', include('dj_rest_auth.urls'))
-# TODO importante url para el password reset
 dj_rest_auth_path_registration = path('auth/registration/', include('dj_rest_auth.registration.urls'))
 # TODO ¿social authentication? ej. Iniciar Sesión con Google
 
