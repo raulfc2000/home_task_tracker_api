@@ -10,7 +10,7 @@ piso.
     - Routine
     Rutinas asociadas a un grupo de usuarios, que contienen a su vez una lista de tareas.
     - Task
-    Cada una de las tareas que se añadirán a una rutina. Almacena a su vez el usuario que la ha creado.
+    Cada una de las tareas que se añadirán a una rutina. Almacena a su vez el usuario que la ha creado y el que realiza la tarea.
 
 ## Permisos
 
@@ -20,10 +20,8 @@ piso.
 [//]: # (Ver si es estrictamente necesario el permiso IsOwnUser)
     Customs:
     - IsSuperUser (Permite realizar la petición únicamente a los superusuarios)
-    - IsOwnUser (El usuario que se quiere modificar es el propio usuario)
-    - IsMemberOfGroup (El usuario que realiza la petición está en el grupo de la Routine)
 
-## Testeo
+## Testeo (NO TERMINADO)
 
     - Filter (testeos unitarios a los filtros de las views con la librería pytest)
     - Serializer (testeos unitarios a los serializadores con la librería django.test)
@@ -46,28 +44,28 @@ Para acceder al swagger, en un navegador web accede al endpoint: http://127.0.0.
 ## Auth
 
     Login:
-    - http://127.0.0.1:8000/login/ (POST)
-    - http://127.0.0.1:8000/logout/ (POST)
+    - http://127.0.0.1:8000/auth/login/ (POST)
+    - http://127.0.0.1:8000/auth/logout/ (POST)
     
     Password:
-    - http://127.0.0.1:8000/password/change/ (POST)
+    - http://127.0.0.1:8000/auth/password/change/ (POST)
     
     Para las próximas versiones (con server de correo):
-    - http://127.0.0.1:8000/password/reset/ (POST)
-    - http://127.0.0.1:8000/password/reset/confirm/ (POST)
+    - http://127.0.0.1:8000/auth/password/reset/ (POST)
+    - http://127.0.0.1:8000/auth/password/reset/confirm/ (POST)
     
     Registration:
-    - http://127.0.0.1:8000/registration/ (POST)
+    - http://127.0.0.1:8000/auth/registration/ (POST)
 
     Para las próximas versiones (con server de correo):
-    - http://127.0.0.1:8000/registration/resend-email/ (POST)
-    - http://127.0.0.1:8000/registration/verify-email/ (POST)
+    - http://127.0.0.1:8000/auth/registration/resend-email/ (POST)
+    - http://127.0.0.1:8000/auth/registration/verify-email/ (POST)
 
 ## User
 
-    - http://127.0.0.1:8000/user/ (GET)
-    - http://127.0.0.1:8000/user/ (PUT)
-    - http://127.0.0.1:8000/user/ (PATCH)
+    - http://127.0.0.1:8000/auth/user/ (GET)
+    - http://127.0.0.1:8000/auth/user/ (PUT)
+    - http://127.0.0.1:8000/auth/user/ (PATCH)
 
 
 ## Group
@@ -76,13 +74,14 @@ Para acceder al swagger, en un navegador web accede al endpoint: http://127.0.0.
     - http://127.0.0.1:8000/group/ (POST)
     - http://127.0.0.1:8000/group/<int:pk>/ (GET)
     - http://127.0.0.1:8000/group/<int:pk>/ (PATCH)
+    - http://127.0.0.1:8000/group/<int:pk>/ (DELETE)
 
 ## Routine
 
-    - http://127.0.0.1:8000/routine/ (GET)
     - http://127.0.0.1:8000/routine/ (POST)
     - http://127.0.0.1:8000/routine/<int:pk>/ (GET)
     - http://127.0.0.1:8000/routine/<int:pk>/ (PATCH)
+    - http://127.0.0.1:8000/routine/<int:pk>/ (DELETE)
 
 
 ## Task
@@ -91,3 +90,4 @@ Para acceder al swagger, en un navegador web accede al endpoint: http://127.0.0.
     - http://127.0.0.1:8000/task/ (POST)
     - http://127.0.0.1:8000/task/<int:pk>/ (GET)
     - http://127.0.0.1:8000/task/<int:pk>/ (PATCH)
+    - http://127.0.0.1:8000/task/<int:pk>/ (DELETE)
