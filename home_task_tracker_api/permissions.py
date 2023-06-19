@@ -12,3 +12,5 @@ class IsSuperUser(permissions.BasePermission):
         # Si existe el usuario y está autenticado, es superusuario
         if user and user.is_authenticated:
             return user.is_superuser
+
+        return False
