@@ -93,7 +93,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """
-        Función para validar funciones adicionales
+        Función para validar condiciones adicionales
         """
         # ARRANGE
         user_id = self.context['request'].user.id
