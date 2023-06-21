@@ -80,6 +80,9 @@ class TaskSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
+        """
+        Añadir funcionalidad a la función create() de la clase padre
+        """
         # Obtener el usuario de la petición.
         user = self.context['request'].user
 
@@ -87,3 +90,22 @@ class TaskSerializer(serializers.ModelSerializer):
         validated_data['created_by'] = user
 
         return super().create(validated_data)
+
+    def validate(self, data):
+        """
+        Función para validar funciones adicionales
+        """
+        # ARRANGE
+        user_id = self.context['request'].user.id
+        group = data['routine'].group
+        group_users_list_ids = group.users_list.values_list('id', flat=True)
+
+        # Si el ID de usuario no está en el listado de IDs de los usuarios del grupo, is_valid() no es True
+        if user_id not in group_users_list_ids:
+            raise serializers.ValidationError("User must be in routine's group")
+
+        # Si el ID del usuario asignado no está en el listado de IDs de los usuarios del grupo, is_valid() no es True
+        if data['assigned_to'] not in group_users_list_ids:
+            raise serializers.ValidationError("User must be in routine's group")
+
+        return data
