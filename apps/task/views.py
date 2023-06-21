@@ -43,7 +43,7 @@ class TaskView(viewsets.ModelViewSet):
             return self.queryset
         # Si no lo es, filtrará por los grupos a los que pertenezca.
         else:
-            return Task.objects.filter(routine__group__users_list=user.id)
+            return Task.objects.filter(assigned_to=user.id)
 
     @doc_view_task_list
     def list(self, request, *args, **kwargs):
